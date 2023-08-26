@@ -1,6 +1,13 @@
 ---
 import { ShopItem } from '../types';
 import AddToCart from '../add-to-cart/add-to-cart';
+
+interface Props {
+  count?: number;
+  showAddToCart?: boolean;
+}
+
+const { count = Infinity, showAddToCart = true} = Astro.props;
 function formatCurrency(amount: number) {
   return new Intl.NumberFormat('en-GB', {
     style: 'currency',
@@ -21,7 +28,7 @@ const shopItems: ShopItem[] = await result.json();
 ---
 
 <section class="shop-items">
-  {shopItems.map((item) => {
+  {shopItems.slice(0, count).map((item) => {
     return (
       <div>
         <div class="item">
@@ -29,7 +36,7 @@ const shopItems: ShopItem[] = await result.json();
           <h2>{item.title}</h2>
           <div>{item.description}</div>
           <div class="price">{formatCurrency(item.price)}</div>
-          <AddToCart client:only="react" item={item} />
+          {showAddToCart && <AddToCart client:only="react" item={item} />}
         </div>
       </div>
     )
