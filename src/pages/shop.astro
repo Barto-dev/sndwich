@@ -1,21 +1,21 @@
 ---
 import Layout from '../layouts/default.astro';
 import ShopItems from '../components/shop-items.astro';
+import { Cart } from '../components/cart/cart';
 ---
 <Layout>
   <div class="shop">
     <h1>Shop Sandwich Kits</h1>
 
     <noscript>
-      <p>JavaScript is required to purchase things from teh sndwch web store. To order by phon call <a href="tel:1234567890">+1 234-567-890</a></p>
+      <p>JavaScript is required to purchase things from teh sndwch web store. To order by phon call
+        <a href="tel:1234567890">+1 234-567-890</a>
+      </p>
     </noscript>
 
     <div class="products">
       <ShopItems />
-
-      <p>
-        <!--TODO: show cart here-->
-      </p>
+      <Cart client:only="solid-js" />
     </div>
   </div>
 </Layout>
