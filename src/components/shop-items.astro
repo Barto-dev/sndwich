@@ -1,5 +1,6 @@
 ---
 import { ShopItem } from '../types';
+import AddToCart from '../add-to-cart/add-to-cart';
 function formatCurrency(amount: number) {
   return new Intl.NumberFormat('en-GB', {
     style: 'currency',
@@ -20,15 +21,19 @@ const shopItems: ShopItem[] = await result.json();
 ---
 
 <section class="shop-items">
-  {shopItems.map((item) => (
-    <div class="item">
-      <img src={item.image.src}  alt={item.image.alt}/>
-      <h2>{item.title}</h2>
-      <p>{item.description}</p>
-      <p class="price">{formatCurrency(item.price)}</p>
-      <!--<p>TODO: add to cart button</p>-->
-    </div>
-  ))}
+  {shopItems.map((item) => {
+    return (
+      <div>
+        <div class="item">
+          <img src={item.image.src} alt={item.image.alt} />
+          <h2>{item.title}</h2>
+          <div>{item.description}</div>
+          <div class="price">{formatCurrency(item.price)}</div>
+          <AddToCart client:only="react" item={item} />
+        </div>
+      </div>
+    )
+  })}
 </section>
 
 <style>
