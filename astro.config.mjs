@@ -6,5 +6,6 @@ import solidJs from "@astrojs/solid-js";
 // https://astro.build/config
 export default defineConfig({
   site: 'http://localhost:3000',
-  integrations: [react(), solidJs()]
+  integrations: [react(), solidJs()],
+  output: 'hybrid',
 });
